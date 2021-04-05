@@ -84,14 +84,14 @@ while not done:
         y2 = 232* cos((i - 89) / 135 * pi)
         pygame.draw.aalines(screen, BLUE, True, [(i, 271 + y1), ((i + 1), 271 + y2)])            
 
-    pygame.draw.line(screen, RED, (660, 60), (690, 60))
-    for x in range(660, 690, 7):
+    pygame.draw.line(screen, RED, (700, 60), (730, 60))
+    for x in range(700, 730, 7):
         pygame.draw.line(screen, BLUE, (x, 80), (x + 3, 80))
     
     text = font.render('sin x', True, BLACK)
-    screen.blit(text,(700,50)) 
+    screen.blit(text,(650,50)) 
     text1 = font.render('cos x', True, BLACK)
-    screen.blit(text1,(700,70))    
+    screen.blit(text1,(650,70))    
     
     pygame.display.flip()
 

@@ -43,7 +43,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(center = (random.randint(40,SCREEN_WIDTH-40), 0))
 
       def move(self):
-        self.rect.move_ip(0,SPEED)
+        self.rect.move_ip(0,5)
         if (self.rect.bottom > 600):
             self.rect.top = 0
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
@@ -91,7 +91,6 @@ P1 = Player()
 E1 = Enemy()
 C1 = Coin()
 
-#Creating Sprites Groups
 enemies = pygame.sprite.Group()
 coins = pygame.sprite.Group()
 enemies.add(E1)
@@ -102,16 +101,16 @@ all_sprites.add(E1)
 all_coins = pygame.sprite.Group()
 all_coins.add(C1)
 
-#Adding a new User event 
+
 INC_SPEED = pygame.USEREVENT + 1
 pygame.time.set_timer(INC_SPEED, 1000)
 
-#Game Loop
+
 while True:
-    #Cycles through all events occuring  
+
     for event in pygame.event.get():
         if event.type == INC_SPEED:
-              SPEED += 0.5      
+              SPEED += 0.5     
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
@@ -120,7 +119,6 @@ while True:
     scores = font_small.render(str(SCORE), True, WHITE)
     DISPLAYSURF.blit(scores, (500,10))
 
-    #Moves and Re-draws all Sprites
     for entity in all_sprites:
         DISPLAYSURF.blit(entity.image, entity.rect)
         entity.move()
@@ -133,9 +131,9 @@ while True:
         SCORE += 1
         pygame.mixer.Sound('tick.mp3').play()
         for entity in all_coins:
-            entity.kill()
+            entity.remove()
+        all_coins.add(C1)
 
-    #To be run if collision occurs between Player and Enemy
          
     if pygame.sprite.spritecollideany(P1, enemies):
           pygame.mixer.Sound('crash.wav').play()

@@ -57,14 +57,14 @@ color_label = font.render("", 1, (255,255,255))
 currentTool = 0
 toolCount = 3
 curColor=blue
-def drawRectangle(surface, x,y, w, h):
-    pygame.draw.rect(surface, curColor, [x, y, w, h],5)
+def drawRectangle(surface, x,y, w, h, color):
+    pygame.draw.rect(surface, color, [x, y, w, h],5)
 
-def drawCircle(surface, x,y):
-    pygame.draw.circle(surface, curColor, (x, y), 50, 5)
+def drawCircle(surface, x,y, color):
+    pygame.draw.circle(surface, color, (x, y), 50, 5)
 
-def drawLine(surface, startPos, endPos):
-    pygame.draw.line(surface, curColor, startPos, endPos, 5)
+def drawLine(surface, startPos, endPos, color):
+    pygame.draw.line(surface, color, startPos, endPos, 5)
 
 def saved():
     global isPressed, currentTool,toolCount,curColor
@@ -81,12 +81,12 @@ def saved():
     ColorPicker()
     screen.fill((255,255,255))
     for i in eval(data[0]):
-        drawLine(screen, i[0], i[1])
+        drawLine(screen, i[0], i[1], i[2])
 
     for i in eval(data[1]):
-        drawRectangle(screen, i[0],i[1], 100, 100)
+        drawRectangle(screen, i[0],i[1], 100, 100, i[2])
     for i in eval(data[2]):
-        drawCircle(screen, i[0],i[1])
+        drawCircle(screen, i[0],i[1], i[2])
     saves={0:eval(data[0]),1:eval(data[1]),2:eval(data[2])}
     go=True
     while go:
@@ -110,6 +110,9 @@ def saved():
                             f.write("%s \n" % (v))
                         f.close()
                     go=False
+                    save_surface = pygame.Surface((500, 500))
+                    save_surface.blit(screen, (0, 0), (0, 0, 500, 500))
+                    pygame.image.save(save_surface, "saved_files/PaintImage" + ".png")
             if event.type == pygame.MOUSEBUTTONDOWN and mx <500:
                 isPressed = True
             elif event.type == pygame.MOUSEBUTTONUP:
@@ -127,14 +130,14 @@ def saved():
                             curColor=rect.color
 
         if currentTool == 0 and isPressed:
-            drawLine(screen, prevPoint, curPoint)
-            saves[currentTool % toolCount].append((prevPoint, curPoint))
+            drawLine(screen, prevPoint, curPoint, curColor)
+            saves[currentTool % toolCount].append((prevPoint, curPoint,curColor))
         elif currentTool == 1 and isPressed:
-            drawRectangle(screen, curPoint[0],curPoint[1],100,100)
-            saves[currentTool % toolCount].append((curPoint[0],curPoint[1]))
+            drawRectangle(screen, curPoint[0],curPoint[1],100,100, curColor)
+            saves[currentTool % toolCount].append((curPoint[0],curPoint[1], curColor))
         elif currentTool == 2 and isPressed:
-            drawCircle(screen,curPoint[0],curPoint[1])
-            saves[currentTool  % toolCount].append((curPoint[0],curPoint[1]))
+            drawCircle(screen,curPoint[0],curPoint[1], curColor)
+            saves[currentTool  % toolCount].append((curPoint[0],curPoint[1],curColor))
 
 
         background = pygame.Surface((500, 500))
@@ -183,6 +186,9 @@ def single():
                             f.write("%s \n" % (v))
                         f.close()
                         go=False
+                    save_surface = pygame.Surface((500, 500))
+                    save_surface.blit(screen, (0, 0), (0, 0, 500, 500))
+                    pygame.image.save(save_surface, "saved_files/PaintImage" + ".png")
             if event.type == pygame.MOUSEBUTTONDOWN and mx <500:
                 isPressed = True
             elif event.type == pygame.MOUSEBUTTONUP:
@@ -200,14 +206,14 @@ def single():
                             curColor=rect.color
 
         if currentTool == 0 and isPressed:
-            drawLine(screen, prevPoint, curPoint)
-            saves[currentTool  % toolCount].append([prevPoint, curPoint])
+            drawLine(screen, prevPoint, curPoint, curColor)
+            saves[currentTool  % toolCount].append([prevPoint, curPoint, curColor])
         elif currentTool == 1 and isPressed:
-            drawRectangle(screen, curPoint[0],curPoint[1],100,100)
-            saves[currentTool  % toolCount].append(curPoint)
+            drawRectangle(screen, curPoint[0],curPoint[1],100,100, curColor)
+            saves[currentTool  % toolCount].append(curPoint, curColor)
         elif currentTool == 2 and isPressed:
-            drawCircle(screen,curPoint[0],curPoint[1])
-            saves[currentTool % toolCount].append(curPoint)
+            drawCircle(screen,curPoint[0],curPoint[1], curColor)
+            saves[currentTool % toolCount].append(curPoint, curColor)
 
 
         background = pygame.Surface((500, 500))

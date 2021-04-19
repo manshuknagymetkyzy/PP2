@@ -169,7 +169,7 @@ def single():
                 if event.key == pygame.K_s:
                     snake2.dx = 0
                     snake2.dy = snake2.speed
-                if event.key == pygame.K_k:
+                if event.key == pygame.K_g:
                     saves=[snake.elements,snake2.elements,snake.score,snake2.score,food.x,food.y,snake.dx,snake.dy,
                     snake2.dx,snake2.dy,snake.size,snake2.size]
                     with open('lvl/save.txt', mode='w') as f:
@@ -268,7 +268,7 @@ def saved_game():
                 if event.key == pygame.K_s:
                     snake2.dx = 0
                     snake2.dy = snake2.speed
-                if event.key == pygame.K_k:
+                if event.key == pygame.K_g:
                     saves=[snake.elements,snake2.elements,snake.score,snake2.score,food.x,food.y,snake.dx,snake.dy,
                     snake2.dx,snake2.dy,snake.size,snake2.size]
                     with open('lvl/save.txt', mode='w') as f:

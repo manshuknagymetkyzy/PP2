@@ -233,19 +233,17 @@ def MainMenu():
     global click
     click = False
     while True:
-        screen.fill((255,255,255))
+        screen.fill((240,230,140))
 
         mx,my = pygame.mouse.get_pos()
 
         button_1 = pygame.Rect(150,200,400,50)
         button_2 = pygame.Rect(150,300,400,50)
-        # button_3 = pygame.Rect(250,400,400,50)
-        pygame.draw.rect(screen,(192,192,192),button_1)
-        pygame.draw.rect(screen,(192,192,192),button_2)
-        # pygame.draw.rect(screen,(192,192,192),button_3)
+        pygame.draw.rect(screen,(220,20,60),button_1)
+        pygame.draw.rect(screen,(220,20,60),button_2)
         draw_text('New Picture',font1,(0,0,0),screen,150,200)
         draw_text('Saved Picture',font1,(0,0,0),screen,150,300)
-        draw_text('Paint',pygame.font.SysFont('ARIAL',75),(0,0,0),screen,150,50)
+        draw_text('Paint',pygame.font.SysFont('Lucida Handwriting',75),(220,20,60),screen,150,50)
 
         if button_1.collidepoint((mx,my)):
             draw_text('New Picture',font1,(255,255,255),screen,150,200)

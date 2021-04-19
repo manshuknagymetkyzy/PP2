@@ -61,10 +61,10 @@ def drawRectangle(surface, x,y, w, h):
     pygame.draw.rect(surface, curColor, [x, y, w, h],5)
 
 def drawCircle(surface, x,y):
-    pygame.draw.circle(surface, curColor, (x, y), 5)
+    pygame.draw.circle(surface, curColor, (x, y), 50, 5)
 
 def drawLine(surface, startPos, endPos):
-    pygame.draw.line(surface, curColor, startPos, endPos, 2)
+    pygame.draw.line(surface, curColor, startPos, endPos, 5)
 
 def saved():
     global isPressed, currentTool,toolCount,curColor
